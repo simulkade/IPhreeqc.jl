@@ -1,0 +1,6 @@
+authors = ["AA Eftekhari <e.eftekhari@gmail.com>"]
+name = "IPhreeqc"
+uuid = "8c5a7d7a-9e02-11e8-11c0-67e94704dfcf"
+version = "0.1.0"
+
+[deps]
