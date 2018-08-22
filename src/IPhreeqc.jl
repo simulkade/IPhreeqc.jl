@@ -1,9 +1,9 @@
 module IPhreeqc
 
-if is_windows()
+if Sys.iswindows()
     error("No binary files for your OS. Only Linux at the moment!")
   # const Lib_IPhreeqc_path=joinpath(Pkg.dir(), "JPhreeqc", "deps", "IPhreeqc.dll")
-elseif is_linux()
+elseif Sys.islinux()
   const Lib_IPhreeqc_path=joinpath("/usr/local/lib", "libiphreeqc.so")
 else
   error("No binary files for your OS. Only Windows and Linux at the moment!")
@@ -26,11 +26,11 @@ function VarCopy(pvarDest, pvarSrc)
 end
 
 function VarFreeString(pSrc)
-    ccall((:VarFreeString, Lib_IPhreeqc_path), Void, (Cstring,), pSrc)
+    ccall((:VarFreeString, Lib_IPhreeqc_path), Nothing, (Cstring,), pSrc)
 end
 
 function VarInit(pvar)
-    ccall((:VarInit, Lib_IPhreeqc_path), Void, (Ptr{VAR},), pvar)
+    ccall((:VarInit, Lib_IPhreeqc_path), Nothing, (Ptr{VAR},), pvar)
 end
 
 function AccumulateLine(id::Cint, line::AbstractString)
@@ -63,7 +63,8 @@ function GetComponent(id::Cint, n::Cint)
 end
 
 function GetComponentCount(id::Cint)
-    ccall((:GetComponentCount, Lib_IPhreeqc_path), Cint, (Cint,), id)
+    n_components = ccall((:GetComponentCount, Lib_IPhreeqc_path), Cint, (Cint,), id)
+    return convert(Int, n_components)
 end
 
 function GetCurrentSelectedOutputUserNumber(id::Cint)
@@ -239,15 +240,15 @@ function LoadDatabaseString(id::Cint, input)
 end
 
 function OutputAccumulatedLines(id::Cint)
-    ccall((:OutputAccumulatedLines, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputAccumulatedLines, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function OutputErrorString(id::Cint)
-    ccall((:OutputErrorString, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputErrorString, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function OutputWarningString(id::Cint)
-    ccall((:OutputWarningString, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputWarningString, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function RunAccumulated(id::Cint)
@@ -263,11 +264,11 @@ function RunString(id::Cint, input)
 end
 
 function SetBasicCallback(id::Cint, fcn, cookie1)
-    ccall((:SetBasicCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Void}, Ptr{Void}), id, fcn, cookie1)
+    ccall((:SetBasicCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Nothing}, Ptr{Nothing}), id, fcn, cookie1)
 end
 
 function SetBasicFortranCallback(id::Cint, fcn)
-    ccall((:SetBasicFortranCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Void}), id, fcn)
+    ccall((:SetBasicFortranCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Nothing}), id, fcn)
 end
 
 function SetCurrentSelectedOutputUserNumber(id::Cint, n::Cint)
@@ -347,11 +348,11 @@ function VarCopy(pvarDest, pvarSrc)
 end
 
 function VarFreeString(pSrc)
-    ccall((:VarFreeString, Lib_IPhreeqc_path), Void, (Cstring,), pSrc)
+    ccall((:VarFreeString, Lib_IPhreeqc_path), Nothing, (Cstring,), pSrc)
 end
 
 function VarInit(pvar)
-    ccall((:VarInit, Lib_IPhreeqc_path), Void, (Ptr{VAR},), pvar)
+    ccall((:VarInit, Lib_IPhreeqc_path), Nothing, (Ptr{VAR},), pvar)
 end
 
 function AccumulateLine(id::Cint, line)
@@ -559,15 +560,15 @@ function LoadDatabaseString(id::Cint, input)
 end
 
 function OutputAccumulatedLines(id::Cint)
-    ccall((:OutputAccumulatedLines, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputAccumulatedLines, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function OutputErrorString(id::Cint)
-    ccall((:OutputErrorString, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputErrorString, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function OutputWarningString(id::Cint)
-    ccall((:OutputWarningString, Lib_IPhreeqc_path), Void, (Cint,), id)
+    ccall((:OutputWarningString, Lib_IPhreeqc_path), Nothing, (Cint,), id)
 end
 
 function RunAccumulated(id::Cint)
@@ -583,11 +584,11 @@ function RunString(id::Cint, input)
 end
 
 function SetBasicCallback(id::Cint, fcn, cookie1)
-    ccall((:SetBasicCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Void}, Ptr{Void}), id, fcn, cookie1)
+    ccall((:SetBasicCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Nothing}, Ptr{Nothing}), id, fcn, cookie1)
 end
 
 function SetBasicFortranCallback(id::Cint, fcn)
-    ccall((:SetBasicFortranCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Void}), id, fcn)
+    ccall((:SetBasicFortranCallback, Lib_IPhreeqc_path), IPQ_RESULT, (Cint, Ptr{Nothing}), id, fcn)
 end
 
 function SetCurrentSelectedOutputUserNumber(id::Cint, n::Cint)
@@ -670,11 +671,11 @@ function VarCopy(pvarDest, pvarSrc)
 end
 
 function VarFreeString(pSrc)
-    ccall((:VarFreeString, Lib_IPhreeqc_path), Void, (Cstring,), pSrc)
+    ccall((:VarFreeString, Lib_IPhreeqc_path), Nothing, (Cstring,), pSrc)
 end
 
 function VarInit(pvar)
-    ccall((:VarInit, Lib_IPhreeqc_path), Void, (Ptr{VAR},), pvar)
+    ccall((:VarInit, Lib_IPhreeqc_path), Nothing, (Ptr{VAR},), pvar)
 end
 
 end # module
