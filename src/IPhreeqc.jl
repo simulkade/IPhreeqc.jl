@@ -1,12 +1,11 @@
 module IPhreeqc
 
 if Sys.iswindows()
-    error("No binary files for your OS. Only Linux at the moment!")
-  # const Lib_IPhreeqc_path=joinpath(Pkg.dir(), "JPhreeqc", "deps", "IPhreeqc.dll")
+    const Lib_IPhreeqc_path=joinpath(@__DIR__, "..", "lib", "libiphreeqc.dll")
 elseif Sys.islinux()
-  const Lib_IPhreeqc_path=joinpath("/usr/local/lib", "libiphreeqc.so")
+    const Lib_IPhreeqc_path=joinpath(@__DIR__, "..", "lib", "libiphreeqc.so")
 else
-  error("No binary files for your OS. Only Windows and Linux at the moment!")
+    error("No binary files for your OS. Only Windows and Linux at the moment!")
 end
 
 VRESULT = Cint
