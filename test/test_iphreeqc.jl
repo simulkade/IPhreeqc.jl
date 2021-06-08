@@ -1,4 +1,5 @@
 # Import IPhreeqc before running this function
+include("../src/IPhreeqc.jl")
 pqc_input = """
 SOLUTION 0
   pH   7   charge
