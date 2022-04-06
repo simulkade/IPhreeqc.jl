@@ -1,5 +1,5 @@
 if Sys.iswindows()
-    url = "https://github.com/simulkade/PhreeqcRM/releases/download/3.7/IPhreeqcd.dll"
+    url = "https://github.com/simulkade/PhreeqcRM/releases/download/3.7.1/IPhreeqc.dll"
     lib_path = joinpath(@__DIR__, "..", "lib", "libiphreeqc.dll")
     if isfile(lib_path)
         println("libiphreeqc.dll exists. Skiping download ...")
@@ -16,7 +16,7 @@ if Sys.iswindows()
     end
 elseif Sys.islinux()
     lib_path = joinpath(@__DIR__, "..", "lib", "libphreeqcrm.so")
-    url = "https://github.com/simulkade/PhreeqcRM/releases/download/3.7/libiphreeqc-3.7.0.so"
+    url = "https://github.com/simulkade/PhreeqcRM/releases/download/3.7.1/libiphreeqc-3.7.1.so"
     if isfile(lib_path)
         println("PhreeqcRM.dll exists. Skiping download ...")
     else
