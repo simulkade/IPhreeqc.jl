@@ -342,4 +342,8 @@ function VarInit(pvar)
     ccall((:VarInit, Lib_IPhreeqc_path), Nothing, (Ptr{VAR},), pvar)
 end
 
+
+# Convenience functions
+include("IPhreeqc_extra.jl")
+
 end # module
