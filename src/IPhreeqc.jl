@@ -215,7 +215,11 @@ function GetWarningStringLineCount(id::Int)
 end
 
 function LoadDatabase(id::Int, filename)
-    ccall((:LoadDatabase, Lib_IPhreeqc_path), Cint, (Cint, Cstring), id, filename)
+    if isfile(filename)
+        ccall((:LoadDatabase, Lib_IPhreeqc_path), Cint, (Cint, Cstring), id, filename)
+    else
+        error("Database $filename does not exist in the current path.")
+    end
 end
 
 function LoadDatabaseString(id::Int, input)
