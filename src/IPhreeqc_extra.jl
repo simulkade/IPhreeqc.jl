@@ -40,3 +40,15 @@ function GetSelectedOutputDict(id::Int, s_id::Int)
     h, v = GetSelectedOutput(id, s_id)
     return Dict(h[i] => v[:,i] for i in 1:length(h))
 end
+
+"""
+function out_string = RunPhreeqcFile(obj, file_name, data_file)
+Runs a Phreeqc input file and return the Phreeqc output string
+"""
+function RunPhreeqcFile(id::Int, file_name, data_file)
+    SetOutputStringOn(id, 1)
+    LoadDatabase(id, data_file)
+    RunFile(id, file_name)
+    out_string = GetOutputString(id)
+    return out_string
+end
